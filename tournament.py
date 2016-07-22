@@ -1,7 +1,5 @@
-
 import psycopg2
 import random
-
 
 def connect():
     """Connect to the PostgreSQL database.  Returns a database connection."""
@@ -35,15 +33,13 @@ def countPlayers():
 
 def registerPlayer(name):
     """Adds a player to the tournament database.
-  
-    The database assigns a unique serial id number for the player.  (This
-    should be handled by your SQL database schema, not in your Python code.)
+    The database assigns a unique serial id number for the player.
   
     Args:
       name: the player's full name (need not be unique).
 
-    Selects player's playerid from players after adding a name, 
-    then inserts playerid into matches.
+    SELECTs player's playerid from players after adding a name, 
+    then INSERTs playerid into matches.
     """
     DB, cursor = connect()
     insquery = '''INSERT INTO players (playername) VALUES (%s)'''
@@ -70,6 +66,7 @@ def playerStandings():
         playerid: the player's unique playerid (assigned by the database)
         name: the player's full name (as registered)
         wins: the number of matches the player has won
+        draws: the number of matches the player has drawn
         matches: the number of matches the player has played
     """
     DB, cursor = connect()
